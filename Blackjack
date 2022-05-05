@@ -68,29 +68,48 @@ def add(n1 , n2):
   
 def blackjack():
   cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-  answer = input("Do you want to play a game of Blackjack? Type 'y' or 'n':")
   i = 0
   j = 0
   myCards = [] 
   compCards = []
-  if answer == 'y':
-    myCards[i] = random.choise(cards)
-    i += 1
-    myCards[i] = random.choise(cards)
-    current_score = add(myCards[0] , myCards[1])
-    compCards[j] = random.choise(cards)
-    print(f"Your cards: " + myCards + ", current score: " + current_score)
-    print(f"Computer's first card: " + compCards )
+  
+  answer = input("Do you want to play a game of Blackjack? Type 'y' or 'n':")
 
+  if answer == 'n':
+    return
+  
+  myCards[i].append(random.choice(cards))
+  i += 1
+  myCards[i].append(random.choice(cards))
+  current_score = add(myCards[0] , myCards[1])
     
+  compCards[j].append(random.choice(cards))
+  j += 1
+  compCards[j].append(random.choice(cards))
+  current_score_comp = add(compCards[0] , compCards[1])
+  print(f"Your cards: " + myCards + ", current score: " + current_score)
+  print(f"Computer's first card: " + compCards[0] )
+
   while answer == 'y':
     answer = input("Do you want to play a game of Blackjack? Type 'y' or 'n':")
     if answer == 'y':
         i += 1
         j += 1
-        myCards[i] = random.choise(cards)
-        compCards[j] = random.choise(cards)
-        
+        myCards[i].append(random.choice(cards))
+        current_score = add(current_score ,myCards[i] )
+
+        compCards[j].append(random.choice(cards))
+        current_score_comp = add(current_score_comp , compCards[j])
+      
+        if current_score > 21:
+          print("You went over!. you lose!")
+          return
+    else:
+      if current_score > current_score_comp:
+        print("You win!")
+      else:
+        print("You lose!")
+          
     
 
       
