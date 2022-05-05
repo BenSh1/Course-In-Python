@@ -110,6 +110,8 @@ def blackjack():
       print("Computer's final hand: " + str(compCards) + ", final score: " + str(current_score_comp))
       if current_score > current_score_comp:
         print("You win!")
+      elif current_score == current_score_comp:
+        print("Draw!")
       else:
         print("You lose!")
           
