@@ -78,14 +78,14 @@ def blackjack():
   if answer == 'n':
     return
   
-  myCards[i].append(random.choice(cards))
+  myCards.append(random.choice(cards))
   i += 1
-  myCards[i].append(random.choice(cards))
+  myCards.append(random.choice(cards))
   current_score = add(myCards[0] , myCards[1])
     
-  compCards[j].append(random.choice(cards))
+  compCards.append(random.choice(cards))
   j += 1
-  compCards[j].append(random.choice(cards))
+  compCards.append(random.choice(cards))
   current_score_comp = add(compCards[0] , compCards[1])
   print(f"Your cards: " + myCards + ", current score: " + current_score)
   print(f"Computer's first card: " + compCards[0] )
@@ -95,10 +95,10 @@ def blackjack():
     if answer == 'y':
         i += 1
         j += 1
-        myCards[i].append(random.choice(cards))
+        myCards.append(random.choice(cards))
         current_score = add(current_score ,myCards[i] )
 
-        compCards[j].append(random.choice(cards))
+        compCards.append(random.choice(cards))
         current_score_comp = add(current_score_comp , compCards[j])
       
         if current_score > 21:
