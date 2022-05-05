@@ -87,8 +87,8 @@ def blackjack():
   j += 1
   compCards.append(random.choice(cards))
   current_score_comp = add(compCards[0] , compCards[1])
-  print(f"Your cards: " + myCards + ", current score: " + current_score)
-  print(f"Computer's first card: " + compCards[0] )
+  print(f"Your cards: {myCards} +, current score:  {current_score}")
+  print(f"Computer's first card:   {compCards[0]} ")
 
   while answer == 'y':
     answer = input("Do you want to play a game of Blackjack? Type 'y' or 'n':")
