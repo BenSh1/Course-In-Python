@@ -87,7 +87,7 @@ def blackjack():
   j += 1
   compCards.append(random.choice(cards))
   current_score_comp = add(compCards[0] , compCards[1])
-  print(f"Your cards: {myCards} +, current score:  {current_score}")
+  print(f"Your cards: {myCards} , current score:  {current_score}")
   print(f"Computer's first card:   {compCards[0]} ")
 
   while answer == 'y':
@@ -100,22 +100,20 @@ def blackjack():
 
       compCards.append(random.choice(cards))
       current_score_comp = add(current_score_comp , compCards[j])
-      print(f"Your cards: {myCards} +, current score:  {current_score}")
+      print(f"Your cards: {myCards} , current score:  {current_score}")
       print(f"Computer's first card:   {compCards[0]} ")  
       if current_score > 21:
         print("You went over!. you lose!")
         return
     else:
+      print("Your final hand: " + str(myCards) + ", final score: " + str(current_score))
+      print("Computer's final hand: " + str(compCards) + ", final score: " + str(current_score_comp))
       if current_score > current_score_comp:
-        print("Your final hand: " + myCards + ", final score" + current_score)
-        print("Computer's final hand: " + compCards + ", final score" + current_score_comp)
         print("You win!")
       else:
         print("You lose!")
           
     
 
-    
 print(logo)
 blackjack()
-
