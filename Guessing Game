@@ -10,6 +10,7 @@
 
 from art import logo
 import random
+
 def Gussing_Number():
   print(logo)
   print("Welcome to the Number Guessing Game!")
@@ -26,7 +27,7 @@ def Gussing_Number():
   
   while end_of_game == False:
     print(f"You have {attempts} attempts to guess the number")
-    guess = input("Make a guess: ")
+    guess = int(input("Make a guess: "))
     attempts -= 1
   
     if guess == number:
@@ -37,8 +38,11 @@ def Gussing_Number():
         print("Too high")
       else:
         print("Too low")
+      
+    if attempts == 0:
+      end_of_game = True
+      print("You've run out of guesses, you lose!")
+    if end_of_game == False:
       print("Guess again")
-
-
-
+      
 Gussing_Number()
