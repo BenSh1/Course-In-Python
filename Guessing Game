@@ -1,4 +1,3 @@
-
 #Number Guessing Game Objectives:
 
 # Include an ASCII art logo.
@@ -10,4 +9,36 @@
 # Include two different difficulty levels (e.g., 10 guesses in easy mode, only 5 guesses in hard mode).
 
 from art import logo
-print(logo)
+import random
+def Gussing_Number():
+  print(logo)
+  print("Welcome to the Number Guessing Game!")
+  print("I'm thinking of a number between 1 and 100.")
+  number = random.randint(1,100)
+  difficulty = input("Choose a difficulty.Type 'easy' or 'hard' :")
+  
+  if difficulty == 'easy':
+    attempts = 10
+  else:
+    attempts = 5
+
+  end_of_game = False
+  
+  while end_of_game == False:
+    print(f"You have {attempts} attempts to guess the number")
+    guess = input("Make a guess: ")
+    attempts -= 1
+  
+    if guess == number:
+      end_of_game = True
+      print(f"You got it! The answer was {guess}")
+    else:
+      if guess > number:
+        print("Too high")
+      else:
+        print("Too low")
+      print("Guess again")
+
+
+
+Gussing_Number()
