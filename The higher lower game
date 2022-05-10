@@ -1,1 +1,23 @@
 
+from art import logo
+from art import vs
+from game_data import data
+import random
+
+print(logo)
+
+person1 = random.choice(data)
+print(person1)
+print(f"Compare A : {person1['name']} a {person1['description']} from {person1['country']}")
+data.remove(person1)
+print(vs)
+
+person2 = random.choice(data)
+print(person2)
+print(f"Compare B : {person2['name']} a {person2['description']} from {person2['country']}")
+
+answer = input("who was more followers? Type 'A' or 'B: '")
+
+if answer =='B':
+  if person2['follower_count'] > person1['follower_count']:
+    
