@@ -20,7 +20,9 @@ def higher_lower_game():
 
     print(f"Compare B : {person2['name']} a {person2['description']} from {person2['country']}")
     
-    answer = input("who was more followers? Type 'A' or 'B: '")
+    data.remove(person2)
+    
+    answer = input("who was more followers? Type 'A' or 'B': ")
     
     if answer =='B':
       if person1['follower_count'] > person2['follower_count']:
@@ -30,12 +32,11 @@ def higher_lower_game():
         score += 1
         print(f"You're right. Current score:{score}")
         
-        
     elif answer =='A':
       if person1['follower_count'] < person2['follower_count']:
         continue_of_game = False
-        
+      else:
+        score += 1
+        print(f"You're right. Current score:{score}")
     
-
-
 higher_lower_game()
