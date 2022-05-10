@@ -94,10 +94,10 @@ def higher_lower_game():
     
     if answer == True:
       score += 1
-      print(f"You're right. Current score:{score}")
+      print(f"You're right. Current score: {score}")
     else:
       continue_of_game = False
-      print(f"Sorry, that's wrong. Final score:{score}")
+      print(f"Sorry, that's wrong. Final score: {score}")
       
     
 
