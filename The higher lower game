@@ -40,3 +40,65 @@ def higher_lower_game():
         print(f"You're right. Current score:{score}")
     
 higher_lower_game()
+
+
+
+====================================================================================================
+
+
+
+from art import logo
+from art import vs
+from game_data import data
+import random
+
+def get_random_account():
+  return random.choice(data)
+
+def check_answer(guess, a_followers, b_followers):
+  if guess =='B':
+    if a_followers > b_followers:
+      return False
+    else:
+      return True
+      
+  else: #answer =='A':
+    if a_followers <  b_followers:
+      return False
+    else:
+      return True
+  
+
+def higher_lower_game():
+  continue_of_game = True
+  score = 0
+  while continue_of_game:
+    print(logo)
+    
+    person1 = get_random_account()
+
+    print(f"Compare A : {person1['name']} a {person1['description']} from {person1['country']}")
+    
+    data.remove(person1)
+    print(vs)
+    
+    person2 = get_random_account()
+
+    print(f"Compare B : {person2['name']} a {person2['description']} from {person2['country']}")
+    
+    data.remove(person2)
+    
+    guess = input("who was more followers? Type 'A' or 'B': ")
+
+    answer = check_answer(guess,person1['follower_count'], person2['follower_count'])
+    
+    if answer == True:
+      score += 1
+      print(f"You're right. Current score:{score}")
+    else:
+      continue_of_game = False
+      print(f"Sorry, that's wrong. Final score:{score}")
+      
+    
+
+higher_lower_game()
