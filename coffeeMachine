@@ -48,4 +48,6 @@ while keep_serving:
         pennies = input("Please insert coins.")
 
         elif choose == 'espresso':
-            if MENU['espresso']['ingredients']['water']
+            if resources['water'] - MENU['espresso']['ingredients']['water'] >= 0 and resources['coffee'] - MENU['espresso']['ingredients']['coffee'] >= 0 and :
+
+
