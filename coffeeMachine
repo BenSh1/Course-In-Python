@@ -48,12 +48,12 @@ while keep_serving:
         keep_serving = False
     else:
         print("Please insert coins.")
-        quarters = input("How many quarters?: ")
-        dimes = input("How many dimes?: ")
-        nickles = input("How many nickles?: ")
-        pennies = input("How many pennies?: ")
+        quarters = int(input("How many quarters?: "))
+        dimes = int(input("How many dimes?: "))
+        nickles = int(input("How many nickles?: "))
+        pennies = int(input("How many pennies?: "))
         money = (quarters * 0.25) + (dimes * 0.10) + (nickles * 0.5) + (pennies * 0.1)
-
+        print(str(money))
         if choose == 'espresso':
             if resources['water'] - MENU['espresso']['ingredients']['water'] >= 0 and resources['coffee'] - MENU['espresso']['ingredients']['coffee'] >= 0:
                 change = money - MENU['espresso']['cost']
@@ -63,13 +63,25 @@ while keep_serving:
                 else:
                     print("Sorry that's not enough money. Money refunded.")
             else:
-                print("Sorry that's not enough money. Money refunded.")
+                print("Sorry there is not enough resources. order canceled.")
 
         elif choose == 'latte':
             if resources['water'] - MENU['latte']['ingredients']['water'] >= 0 and resources['milk'] - MENU['latte']['ingredients']['milk'] >= 0 and resources['coffee'] - MENU['latte']['ingredients']['coffee'] >= 0:
-                change = money - MENU['espresso']['cost']
+                change = money - MENU['latte']['cost']
                 if change >= 0:
                     print(f"Here is ${change} in change.")
                     print(f"Here is your {choose} Enjoy!")
                 else:
                     print("Sorry that's not enough money. Money refunded.")
+            else:
+                print("Sorry there is not enough resources. order canceled.")
+        elif choose == 'cappuccino':
+            if resources['water'] - MENU['cappuccino']['ingredients']['water'] >= 0 and resources['milk'] - MENU['cappuccino']['ingredients']['milk'] >= 0 and resources['coffee'] - MENU['cappuccino']['ingredients']['coffee'] >= 0:
+                change = money - MENU['cappuccino']['cost']
+                if change >= 0:
+                    print(f"Here is ${change} in change.")
+                    print(f"Here is your {choose} Enjoy!")
+                else:
+                    print("Sorry that's not enough money. Money refunded.")
+            else:
+                print("Sorry there is not enough resources. order canceled.")
