@@ -53,12 +53,14 @@ while keep_serving:
         nickles = int(input("How many nickles?: "))
         pennies = int(input("How many pennies?: "))
         money = (quarters * 0.25) + (dimes * 0.10) + (nickles * 0.5) + (pennies * 0.1)
-        print(str(money))
+
+        print("%.2f" % money)
         if choose == 'espresso':
             if resources['water'] - MENU['espresso']['ingredients']['water'] >= 0 and resources['coffee'] - MENU['espresso']['ingredients']['coffee'] >= 0:
                 change = money - MENU['espresso']['cost']
                 if change >= 0:
-                    print(f"Here is ${change} in change.")
+                    print("Here is  $%.2f " % change + "in change.")
+                    # print(f"Here is  ${change} in change.")
                     print(f"Here is your {choose} Enjoy!")
                 else:
                     print("Sorry that's not enough money. Money refunded.")
@@ -69,7 +71,8 @@ while keep_serving:
             if resources['water'] - MENU['latte']['ingredients']['water'] >= 0 and resources['milk'] - MENU['latte']['ingredients']['milk'] >= 0 and resources['coffee'] - MENU['latte']['ingredients']['coffee'] >= 0:
                 change = money - MENU['latte']['cost']
                 if change >= 0:
-                    print(f"Here is ${change} in change.")
+                    print("Here is  $%.2f " % change + "in change.")
+                    # print(f"Here is ${change} in change.")
                     print(f"Here is your {choose} Enjoy!")
                 else:
                     print("Sorry that's not enough money. Money refunded.")
@@ -79,7 +82,8 @@ while keep_serving:
             if resources['water'] - MENU['cappuccino']['ingredients']['water'] >= 0 and resources['milk'] - MENU['cappuccino']['ingredients']['milk'] >= 0 and resources['coffee'] - MENU['cappuccino']['ingredients']['coffee'] >= 0:
                 change = money - MENU['cappuccino']['cost']
                 if change >= 0:
-                    print(f"Here is ${change} in change.")
+                    print("Here is  $%.2f " % change + "in change.")
+                    # print(f"Here is ${change} in change.")
                     print(f"Here is your {choose} Enjoy!")
                 else:
                     print("Sorry that's not enough money. Money refunded.")
