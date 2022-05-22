@@ -1,21 +1,51 @@
 from turtle import Turtle , Screen
 import random
+import turtle as t
 
 tim = Turtle()
-colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray", "SeaGreen"]
 
 
-def draw_shape(num_sides):
-    angle = 360 / num_sides
-    for _ in range(num_sides):
-        tim.forward(100)
-        tim.left(angle)
+# ============ challenge 4 ==========================================
+########### Challenge 4 - Random Walk ########
 
-for shape_side_n in range(3, 10):
-    tim.color(random.choice(colours))
-    draw_shape(shape_side_n)
+t.colormode(255)
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    random_color = (r, g, b)
+    return random_color
 
-# ======================================================
+# colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray", "SeaGreen"]
+# tim.color(random.choice(colours))
+
+directions = [0, 90, 180, 360]
+tim.pensize(15)
+tim.speed('fastest')
+
+for _ in range(200):
+    tim.color(random_color())
+    tim.forward(30)
+    tim.setheading(random.choice(directions))
+
+
+
+
+# ============ challenge 3 ==========================================
+
+# colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray", "SeaGreen"]
+# colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray", "SeaGreen"]
+# def draw_shape(num_sides):
+#     angle = 360 / num_sides
+#     for _ in range(num_sides):
+#         tim.forward(100)
+#         tim.left(angle)
+#
+# for shape_side_n in range(3, 10):
+#     tim.color(random.choice(colours))
+#     draw_shape(shape_side_n)
+
+# ============ challenge 2 ==========================================
 
 # colours = ["medium sea green", "dark sea green" ,"aquamarine" , "dark turquoise" , "lime green"]
 # tim = Turtle()
@@ -35,7 +65,7 @@ for shape_side_n in range(3, 10):
 #     angle = 360 / i
 
 
-# ======================================================
+# ============ challenge 1 ==========================================
 
 # for _ in range(10):
 #     tim.forward(15)
