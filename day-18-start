@@ -1,0 +1,54 @@
+from turtle import Turtle , Screen
+import random
+
+tim = Turtle()
+colours = ["CornflowerBlue", "DarkOrchid", "IndianRed", "DeepSkyBlue", "LightSeaGreen", "wheat", "SlateGray", "SeaGreen"]
+
+
+def draw_shape(num_sides):
+    angle = 360 / num_sides
+    for _ in range(num_sides):
+        tim.forward(100)
+        tim.left(angle)
+
+for shape_side_n in range(3, 10):
+    tim.color(random.choice(colours))
+    draw_shape(shape_side_n)
+
+# ======================================================
+
+# colours = ["medium sea green", "dark sea green" ,"aquamarine" , "dark turquoise" , "lime green"]
+# tim = Turtle()
+# tim.shape("turtle")
+# tim.color("black")
+# i = 3
+# angle = 120
+# for _ in range(8):
+#     x = 0
+#     tim.color(random.choice(colours))
+#     while x < i:
+#         tim.left(angle)
+#         tim.forward(100)
+#         x += 1
+#
+#     i += 1
+#     angle = 360 / i
+
+
+# ======================================================
+
+# for _ in range(10):
+#     tim.forward(15)
+#     tim.penup()
+#     tim.forward(15)
+#     tim.pendown()
+
+# ======================================================
+
+# for _ in range(4):
+#     tim.forward(100)
+#     tim.right(90)
+
+
+screen = Screen()
+screen.exitonclick()
