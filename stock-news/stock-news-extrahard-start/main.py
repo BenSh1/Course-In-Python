@@ -2,22 +2,26 @@ import json
 import requests
 import smtplib
 
-
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 
 my_email = "sben199604@gmail.com"
 password = "ayrjldndsfyoocas" # i assume for email in gmail
 
-pass2 = "CDAUE1B1J8AKRE7K" # for email in yahoo
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+CHANGE_PERCENTAGE = 0.2
+
+STOCK_API_KEY = "TBW5O365BWHOXTZ9"
+NEWS_API_KEY = "b5c2c68d0e3440079f9db5202996fbc2"
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 
-STOCK_API_KEY = "TBW5O365BWHOXTZ9"
+## STEP 2: Use https://newsapi.org
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+
 
 stock_params = {
     "function":"TIME_SERIES_DAILY",
@@ -46,21 +50,47 @@ the_day_before_yesterday_closing_price = the_day_before_yesterday_data["4. close
 #print("the_day_before_yesterday_closing_price : " , the_day_before_yesterday_closing_price)
 
 
-difference = abs(float(yesterday_closing_price) - float(the_day_before_yesterday_closing_price))
+
+difference = float(yesterday_closing_price) - float(the_day_before_yesterday_closing_price)
 #print("difference : " ,difference)
 
-diff_percent = (difference / float(yesterday_closing_price)) * 100
+diff_percent = round((difference / float(yesterday_closing_price)) * 100)
+diff_percent = abs(diff_percent)
 #print("diff_percent : ", diff_percent)
 
-if diff_percent > 5:
-    print("Get News!")
 
+if diff_percent > CHANGE_PERCENTAGE:
+    news_params = {
+        "qInTitle":COMPANY_NAME,
+        "apiKey":NEWS_API_KEY
+    }
 
-## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+    news_response = requests.get(NEWS_ENDPOINT,news_params)
+    news_response.raise_for_status()
+    articles = news_response.json()["articles"]
+    three_articles = articles[:3]
+    #print(three_articles)
 
+    formatted_articles = [f"Healdline: {article['title']}. \nBrief: {article['description']}" for article in three_articles]
+    #print(formatted_articles[1])
+    
+    
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        print("sent via email!")
+        connection.starttls()
+
+        connection.login(user= my_email, password=password)
+
+        connection.sendmail(
+            from_addr=my_email , 
+            to_addrs="shar.ben@yahoo.com" , 
+            msg=f"Subject:Change in {COMPANY_NAME} \n\n{STOCK}: {diff_percent} '%\n' {formatted_articles[0]}"
+        )
+
+    
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
+
 
 
 #Optional: Format the SMS message like this: 
