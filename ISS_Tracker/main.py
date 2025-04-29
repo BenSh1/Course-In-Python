@@ -3,9 +3,8 @@ import requests
 from datetime import datetime
 import smtplib
 
-
-MY_LAT = 32.766948 # Your latitude
-MY_LONG = 35.011429 # Your longitude
+MY_LAT = 32.794044  # Your latitude
+MY_LONG = 34.989571  # Your longitude
 my_email = "sben199604@gmail.com"
 password = "ayrjldndsfyoocas"
 
@@ -17,13 +16,13 @@ def is_iss_overhead():
 
     iss_latitude = float(data["iss_position"]["latitude"])
     iss_longitude = float(data["iss_position"]["longitude"])
-    #Your position is within +5 or -5 degrees of the ISS position.
-    if MY_LAT-5 <= iss_latitude <= MY_LAT+ 5 and MY_LONG - 5<= iss_longitude <= MY_LONG + 5:
+    # Your position is within +5 or -5 degrees of the ISS position.
+    if MY_LAT - 5 <= iss_latitude <= MY_LAT + 5 and MY_LONG - 5 <= iss_longitude <= MY_LONG + 5:
         return True
+    return False
 
 
 def is_night():
-
     parameters = {
         "lat": MY_LAT,
         "lng": MY_LONG,
@@ -35,44 +34,47 @@ def is_night():
     data = response.json()
     sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
     sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
+    print(f"In your location the sunrise: {sunrise} and the sunset: {sunset}")
 
     time_now = datetime.now()
 
     if sunset <= time_now or time_now <= sunrise:
         return True
+    return False
 
-#If the ISS is close to my current position
-# and it is currently dark
+
+# If the ISS is close to my current position , using the function - is_iss_overhead()
+# and it is currently dark using the function - is_night()
 # Then send me an email to tell me to look up.
 # BONUS: run the code every 60 seconds.
-"""
 
-while True:
-    time.sleep(60)
+if __name__ == '__main__':
+
+    while True:
+        time.sleep(60)
+        if is_iss_overhead() and is_night() :
+            with smtplib.SMTP("smtp.gmail.com") as connection:
+                connection.starttls()
+                connection.login(user= my_email, password=password)
+    
+                connection.sendmail(
+                            from_addr=my_email , 
+                            to_addrs="shar.ben@yahoo.com" , 
+                            msg="Subject:Look Up👆\n\nThe ISS is above you in the sky."
+                        )
+
+
+    """
     if is_iss_overhead() and is_night() :
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
             connection.login(user= my_email, password=password)
-
+    
             connection.sendmail(
-                        from_addr=my_email , 
-                        to_addrs="shar.ben@yahoo.com" , 
-                        msg="Subject:Look Up👆\n\nThe ISS is above you in the sky."
-                    )
-
-   
-
-"""
- 
-if is_iss_overhead() and is_night() :
-    with smtplib.SMTP("smtp.gmail.com") as connection:
-        connection.starttls()
-        connection.login(user= my_email, password=password)
-
-        connection.sendmail(
-                        from_addr=my_email , 
-                        to_addrs="shar.ben@yahoo.com" , 
-                        msg="Subject:Look Up👆\n\nThe ISS is above you in the sky."
-                    )
-
-   
+                            from_addr=my_email , 
+                            to_addrs="shar.ben@yahoo.com" , 
+                            msg="Subject:Look Up👆\n\nThe ISS is above you in the sky."
+                        )
+    
+    
+    """
